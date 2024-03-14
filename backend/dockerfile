@@ -8,4 +8,4 @@ ADD https://s3-us-west-2.amazonaws.com/studentapi-cit/mysql-connector.jar lib/
 COPY student.war webapps/student.war
 EXPOSE 8080
 ENTRYPOINT [ "./bin/catalina.sh" ]
-RUN ["run"]
+#RUN ["run"]
