@@ -1,12 +1,11 @@
 FROM ubuntu:latest
-RUN apt-get update -y
-RUN apt-get install openjdk-11-jre-headless -y
-ADD https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.99/bin/apache-tomcat-8.5.99.tar.gz ./
-RUN tar -xvf apache-tomcat-8.5.99.tar.gz -C /opt/
+RUN apt update 
+RUN apt install openjdk-11-jre-headless -y 
+ADD https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.99/bin/apache-tomcat-8.5.99.tar.gz .
+RUN tar -xvf apache-tomcat-8.5.99.tar.gz -C /opt
 WORKDIR /opt/apache-tomcat-8.5.99
-COPY context.xml conf/context.xml
-ADD https://s3-us-west-2.amazonaws.com/studentapi-cit/mysql-connector.jar lib/
+COPY context.xml conf/context.xml 
 COPY student.war webapps/student.war
-EXPOSE 8080
+COPY mysql-connector.jar lib/mysql-connector.jar 
 ENTRYPOINT [ "bin/catalina.sh" ]
-RUN ["run"]
+CMD [ "run" ]
